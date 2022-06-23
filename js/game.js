@@ -6,17 +6,55 @@
 //Declare question 
 var questionPosition = 0; 
 var questions = [
-    //First question 
-    
-    //Second Question
+    { 
+        question: "What is the color", 
+        chocies: [ "answerA", "answerB", "answerC", "answerD"], 
+        correctAnswer: "answerA", 
+    }, 
+    {
+        question: "question2", 
+        chocies: [ "answerE", "answerF", "answerG", "answerH"], 
+        correctAnswer: "answerF", 
+    }, 
+    {
+        question: "question3", 
+        chocies: [ "answerI", "answerJ", "answerK", "answerL"], 
+        correctAnswer: "answerL", 
+    }
 ]
+function nextQuestion() {
+    questionPosition ++;  
+    showQuestion(); 
+}
+
+function showQuestion(){
+    document.getElementById("questionTitle").textContent = questions[questionPosition].question 
+    document.getElementById("answer0").textContent = questions[questionPosition].chocies[0]
+    document.getElementById("answer1").textContent = questions[questionPosition].chocies[1]
+    document.getElementById("answer2").textContent = questions[questionPosition].chocies[2]
+    document.getElementById("answer3").textContent = questions[questionPosition].chocies[3]
+
+    document.getElementById("answer0").addEventListener("click", nextQuestion)
+}
 
 // Declare the "timeEl"
 var timeEL = document.querySelector('#timer');
+var startbuttonEl = document.querySelector('#startButton'); 
+
+var startGameEl = document.querySelector('.startGame'); 
 
 //Fucntion "startGame"
-
+startbuttonEl.addEventListener('click', function() {
     //Hide the start screen
+    startGameEl.style.display = 'none'; 
+
+    document.querySelector(".quiz").classList.remove("hide")
+
+    showQuestion(); 
+
+    
+
+})
 
     //Set the question position to 0 
 
