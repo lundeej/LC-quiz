@@ -46,16 +46,9 @@ var startButtonEl = document.querySelector('#startQuizButton');
 //Define "start game page"
 var startGameEl = document.querySelector('.startGamePage'); 
 
-//Fucntion "startGame"
-startButtonEl.addEventListener('click', function() {
-    //Hide the start screen
-    startGameEl.style.display = 'none'; 
-    //Show Question area and questions 
-    document.querySelector(".quiz").classList.remove("hide")
-    showQuestion(); 
-})
 
 // Declare "countdown timer"
+var countdown; 
 
 // declare 'timeInterval'
 var timeInterval;
@@ -64,32 +57,42 @@ var timeInterval;
 var timeEl = document.getElementById('timer');
 var mainEl = document.getElementById('main'); 
 
-var timerId = setInterval(countdown, 1000); 
+var timeRemaining = 5; 
+var holdtime = 0; 
+var incorrectAnswer = 10; 
 
-var timeRemaining = 10; 
+//Funtion to start timer, hide start game page and show questions 
+startButtonEl.addEventListener('click', function() { 
 
-function countdown() {
-    if( !timeRemaining ){
-        clearInterval(timerId); 
-        gameOver(); 
-    }   else {
-        timeEl.textContent = timeRemaining + ' seconds remaining'; 
-        timeRemaining--; 
-    }
-}
+    if (holdtime === 0) {
+        holdtime = setInterval(function () {
+            timeRemaining--; 
+            timeEl.textContent = timeRemaining + " seconds remaining!"; 
+        
+             if (!timeRemaining){
+                clearInterval(holdtime); 
+                gameOver();
+                timeEl.textContent = 'Times Up!'
+             }
+        }, 1000);
+    } 
+
+    //Hide the start screen
+    startGameEl.style.display = 'none'; 
+    //Show Question area and questions and start countdown timer 
+    document.querySelector(".quiz").classList.remove("hide") 
+    showQuestion(); 
+}); 
 
 function gameOver() {
-   timeEl.textContent = 'Game Over'
+   //Hide the question area 
+   document.querySelector('.quiz').classList.add("hide")
+
+   //Show the record high score 
+
 }
 
-        //If 'countdown === 0 then 'endGame()
-        
-    // Function 'endGame'       
-    // function endGame () 
 
-        //Hide the question area 
-
-        //Show the record high score 
 
     // Fucntion 'answerQuestion'
         //Check if the selected answe is correct
