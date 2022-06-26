@@ -1,51 +1,8 @@
-
-//Declare question 
-var questionPosition = 0; 
-var questions = [
-    { 
-        question: "What is the color", 
-        chocies: [ "answerA", "answerB", "answerC", "answerD"], 
-        correctAnswer: "answerA", 
-    }, 
-    {
-        question: "question2", 
-        chocies: [ "answerE", "answerF", "answerG", "answerH"], 
-        correctAnswer: "answerF", 
-    }, 
-    {
-        question: "question3", 
-        chocies: [ "answerI", "answerJ", "answerK", "answerL"], 
-        correctAnswer: "answerL", 
-    }
-]
-// Function to show next question 
-function nextQuestion() {
-    questionPosition ++;  
-    showQuestion(); 
-}
-
-// Function to Show the Questions
-function showQuestion(){
-    document.getElementById("questionTitle").textContent = questions[questionPosition].question 
-    document.getElementById("answer0").textContent = questions[questionPosition].chocies[0]
-    document.getElementById("answer1").textContent = questions[questionPosition].chocies[1]
-    document.getElementById("answer2").textContent = questions[questionPosition].chocies[2]
-    document.getElementById("answer3").textContent = questions[questionPosition].chocies[3]
-    
-    // Go to next question 
-    document.getElementById('answer0').addEventListener("click", nextQuestion)
-    document.getElementById('answer1').addEventListener("click", nextQuestion)
-    document.getElementById('answer2').addEventListener("click", nextQuestion)
-    document.getElementById('answer3').addEventListener("click", nextQuestion)
-
-}
-
 // Define "Start Button"
 var startButtonEl = document.querySelector('#startQuizButton'); 
 
 //Define "start game page"
 var startGameEl = document.querySelector('.startGamePage'); 
-
 
 // Declare "countdown timer"
 var countdown; 
@@ -57,12 +14,12 @@ var timeInterval;
 var timeEl = document.getElementById('timer');
 var mainEl = document.getElementById('main'); 
 
-var timeRemaining = 5; 
+var timeRemaining = 11; 
 var holdtime = 0; 
 var incorrectAnswer = 10; 
 
 //Funtion to start timer, hide start game page and show questions 
-startButtonEl.addEventListener('click', function() { 
+timeInterval = startButtonEl.addEventListener('click', function() { 
 
     if (holdtime === 0) {
         holdtime = setInterval(function () {
@@ -73,10 +30,9 @@ startButtonEl.addEventListener('click', function() {
                 clearInterval(holdtime); 
                 gameOver();
                 timeEl.textContent = 'Times Up!'
-             }
+             } 
         }, 1000);
     } 
-
     //Hide the start screen
     startGameEl.style.display = 'none'; 
     //Show Question area and questions and start countdown timer 
@@ -84,32 +40,82 @@ startButtonEl.addEventListener('click', function() {
     showQuestion(); 
 }); 
 
+var questionPosition = 0; 
+var score = 0; 
+var chosenAnswer; 
+var quizDiv = document.querySelector('.quiz'); 
+
+// questions list 
+var questions = [
+    { 
+        question: "What color is an apple?", 
+        chocies: [ "Red", "Orange", "Blue", "Purple"], 
+        correctAnswer: "Red", 
+    }, 
+    {
+        question: "What color is a banana?", 
+        chocies: [ "Blue", "Yellow", "Red", "Orange"], 
+        correctAnswer: "Yellow", 
+    }, 
+    {
+        question: "What color is an orange?", 
+        chocies: [ "Purple", "Blue", "Yellow", "Orange"], 
+        correctAnswer: "Orange", 
+    }
+]
+// Function to show next question 
+function nextQuestion() {
+    questionPosition++;
+    
+    if(questionPosition >= questions.length){
+        gameOver(); 
+    } else {
+        showQuestion(); 
+    }
+}
+
+// Function to Show the Questions
+function showQuestion(){
+
+    document.getElementById("questionTitle").textContent = questions[questionPosition].question 
+    document.getElementById("answer0").textContent = questions[questionPosition].chocies[0]
+    document.getElementById("answer1").textContent = questions[questionPosition].chocies[1]
+    document.getElementById("answer2").textContent = questions[questionPosition].chocies[2]
+    document.getElementById("answer3").textContent = questions[questionPosition].chocies[3]
+    
+    // Go to next question 
+    document.getElementById('answer0').addEventListener("click", nextQuestion)
+    document.getElementById('answer1').addEventListener("click", nextQuestion)
+    document.getElementById('answer2').addEventListener("click", nextQuestion)
+    document.getElementById('answer3').addEventListener("click", nextQuestion)
+}
+
+//function to Compare Answers 
+function compareAnswer(event) {
+
+    chosenAnswer = questions[questionPosition].chocies
+    console.log(chosenAnswer); 
+    console.log("yes"); 
+
+    if(chosenAnswer == questions[questionPosition].correctAnswer){
+        score++; 
+        console.log("yes"); 
+    } 
+}
+
+var endGameDiv = document.querySelector('.endGame'); 
+
 function gameOver() {
    //Hide the question area 
    document.querySelector('.quiz').classList.add("hide")
 
+   endGameDiv.innerHTML = ""; 
+   timeEl.innerHTML = "";
+
+   var createH1 = document.createElement("h1"); 
+   createH1.setAttribute("id", "createH1"); 
+   createH1.textContent = "Quiz is over!"
+
+   endGameDiv.appendChild(createH1); 
    //Show the record high score 
-
 }
-
-
-
-    // Fucntion 'answerQuestion'
-        //Check if the selected answe is correct
-
-            //If the answer is wrong 
-
-                //then we need to subtract from 'countdown'
-
-        //Increse the question position by 1 
-
-        // If I've passed the last question 
-            //Then 'endGame'
-
-        // Else 
-            //Display the currect question 
-            //displayCurrentQuestion();
-
-    //Function 'displayCurrentQuestion'
-
-    // Function 'recordTheHighScore'

@@ -4,36 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Center Quiz</title>
+    <title>Learning Color Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <!-- Top Bar -->
-    <nav>
          <a href="./highscores.html">View HighScores</a>
         
-        </nav>
+        <h2 id="timer"></h2>
         
-        <h2 id="timer" style="text-align: right;"></h2>
+    <!-- Start -->
+    <div class="startGamePage">
+        <h1>Learning Color Quiz!</h1>
+        <p>Try to answering the following color questions!</p>
+        <button id='startQuizButton' type="button">Start Quiz</button>
+    </div>
         
-        <!-- Start -->
-        <div class="startGamePage">
-            <h1>Games</h1>
-            <p>Try to answering the following color questions!</p>
-            <button id='startQuizButton' type="button">Start Quiz</button>
+    <!-- Questions -->
+    <!-- // Ensure that button has data-'name' -->
+    <div class="quiz hide">
+        <div id="questions">
+            <h1 id="questionTitle"></h1>
+            <button id="answer0"></button>
+            <button id="answer1"></button>
+            <button id="answer2"></button>
+            <button id="answer3"></button>
         </div>
-        
-        <!-- Questions -->
-        <!-- // Ensure that button has data-'name' -->
-        <div class="quiz hide">
-            <div id="questions">
-                <h1 id="questionTitle"></h1>
-                <button id="answer0"></button>
-                <button id="answer1"></button>
-                <button id="answer2"></button>
-                <button id="answer3"></button>
-            </div>
-        </div>
+    </div>
         
     <!-- EndGame -->
     <div class="endGame"></div>

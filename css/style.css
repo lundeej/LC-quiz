@@ -1,3 +1,32 @@
+body {
+    text-align: center; 
+    background-color: rgb(238, 222, 230);
+    color: rgb(132, 173, 210);
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .hide {
     display: none;
+}
+
+.startGamePage {
+    
+}
+
+#timer {
+    
+}
+
+#questions {
+    
+}
+
+#createH1 {
+    
+}
+
+#startQuizButton {
+    color: rgb(132, 173, 210);
+    background-color: rgb(235, 192, 213);
+    font-size: 24px; 
 }
