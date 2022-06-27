@@ -42,7 +42,6 @@ timeInterval = startButtonEl.addEventListener('click', function() {
 
 var questionPosition = 0; 
 var score = 0; 
-var chosenAnswer; 
 var quizDiv = document.querySelector('.quiz'); 
 
 // questions list 
@@ -58,6 +57,11 @@ var questions = [
         correctAnswer: "Yellow", 
     }, 
     {
+        question: "What color is a watermelon?", 
+        chocies: [ "Blue", "Green", "Red", "Orange"], 
+        correctAnswer: "Green", 
+    }, 
+    {
         question: "What color is an orange?", 
         chocies: [ "Purple", "Blue", "Yellow", "Orange"], 
         correctAnswer: "Orange", 
@@ -70,7 +74,7 @@ function nextQuestion() {
     if(questionPosition >= questions.length){
         gameOver(); 
     } else {
-        showQuestion(); 
+        showQuestion();
     }
 }
 
@@ -83,25 +87,25 @@ function showQuestion(){
     document.getElementById("answer2").textContent = questions[questionPosition].chocies[2]
     document.getElementById("answer3").textContent = questions[questionPosition].chocies[3]
     
-    // Go to next question 
+    // Go to next question
     document.getElementById('answer0').addEventListener("click", nextQuestion)
     document.getElementById('answer1').addEventListener("click", nextQuestion)
     document.getElementById('answer2').addEventListener("click", nextQuestion)
     document.getElementById('answer3').addEventListener("click", nextQuestion)
 }
 
-//function to Compare Answers 
-function compareAnswer(event) {
+var correctAnswerDiv = document.querySelector("#correctAnswer"); 
+var answerSelected = document.querySelector("#questionList"); 
 
-    chosenAnswer = questions[questionPosition].chocies
-    console.log(chosenAnswer); 
-    console.log("yes"); 
+console.log(answerSelected); 
 
-    if(chosenAnswer == questions[questionPosition].correctAnswer){
-        score++; 
+answerSelected.addEventListener("click", function(event) {
+    var element = event.target; 
+
+    if(element == questions[questionPosition].correctAnswer) {
         console.log("yes"); 
-    } 
-}
+    }
+});
 
 var endGameDiv = document.querySelector('.endGame'); 
 
@@ -117,5 +121,6 @@ function gameOver() {
    createH1.textContent = "Quiz is over!"
 
    endGameDiv.appendChild(createH1); 
+   
    //Show the record high score 
 }
