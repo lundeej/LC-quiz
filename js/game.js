@@ -25,12 +25,12 @@ timeInterval = startButtonEl.addEventListener('click', function() {
         holdtime = setInterval(function () {
             timeRemaining--; 
             timeEl.textContent = timeRemaining + " seconds remaining!"; 
-        
-             if (!timeRemaining){
+            
+            if (!timeRemaining){
                 clearInterval(holdtime); 
                 gameOver();
                 timeEl.textContent = 'Times Up!'
-             } 
+            } 
         }, 1000);
     } 
     //Hide the start screen
@@ -97,16 +97,6 @@ function showQuestion(){
 var correctAnswerDiv = document.querySelector("#correctAnswer"); 
 var answerSelected = document.querySelector("#questionList"); 
 
-console.log(answerSelected); 
-
-answerSelected.addEventListener("click", function(event) {
-    var element = event.target; 
-
-    if(element == questions[questionPosition].correctAnswer) {
-        console.log("yes"); 
-    }
-});
-
 var endGameDiv = document.querySelector('.endGame'); 
 
 function gameOver() {
@@ -121,6 +111,13 @@ function gameOver() {
    createH1.textContent = "Quiz is over!"
 
    endGameDiv.appendChild(createH1); 
-   
+
+   //Area to input name 
+   var createP1 = document.createElement("h2"); 
+   createP1.setAttribute("id", "createP1"); 
+   createP1.textContent = "Enter your initals to record your score." 
+
+    endGameDiv.appendChild(createP1); 
+
    //Show the record high score 
 }
