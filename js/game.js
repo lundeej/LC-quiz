@@ -14,17 +14,18 @@ var timeInterval;
 var timeEl = document.getElementById('timer');
 var mainEl = document.getElementById('main'); 
 
-var timeRemaining = 11; 
-var holdtime = 0; 
+var timeRemaining = 75; 
+var holdtime ; 
 var incorrectAnswer = 10; 
 
 //Funtion to start timer, hide start game page and show questions 
 timeInterval = startButtonEl.addEventListener('click', function() { 
+    
+    timeEl.textContent = timeRemaining + " seconds remaining!"; 
 
-    if (holdtime === 0) {
-        holdtime = setInterval(function () {
-            timeRemaining--; 
-            timeEl.textContent = timeRemaining + " seconds remaining!"; 
+    holdtime = setInterval(function () {
+        timeRemaining--; 
+        timeEl.textContent = timeRemaining + " seconds remaining!"; 
             
             if (!timeRemaining){
                 clearInterval(holdtime); 
@@ -32,17 +33,19 @@ timeInterval = startButtonEl.addEventListener('click', function() {
                 timeEl.textContent = 'Times Up!'
             } 
         }, 1000);
-    } 
+    
     //Hide the start screen
     startGameEl.style.display = 'none'; 
     //Show Question area and questions and start countdown timer 
     document.querySelector(".quiz").classList.remove("hide") 
+    
     showQuestion(); 
 }); 
 
 var questionPosition = 0; 
 var score = 0; 
 var quizDiv = document.querySelector('.quiz'); 
+var correctAnswerDiv = document.querySelector("#correctAnswer"); 
 
 // questions list 
 var questions = [
@@ -65,13 +68,26 @@ var questions = [
         question: "What color is an orange?", 
         chocies: [ "Purple", "Blue", "Yellow", "Orange"], 
         correctAnswer: "Orange", 
+    }, 
+    {
+        question: "What color is a pickle?", 
+        chocies: [ "Purple", "Blue", "Green", "Orange"], 
+        correctAnswer: "Green", 
     }
 ]
+
 // Function to show next question 
 function nextQuestion() {
-    questionPosition++;
     
+    if(this.innerHTML !== questions[questionPosition].correctAnswer) {
+        
+        correctAnswerDiv.textContent = "The correct answer is " + questions[questionPosition].correctAnswer + "."; 
+        timeRemaining = timeRemaining - incorrectAnswer;   
+    } 
+
+    questionPosition++;
     if(questionPosition >= questions.length){
+        clearInterval(holdtime); 
         gameOver(); 
     } else {
         showQuestion();
@@ -94,30 +110,24 @@ function showQuestion(){
     document.getElementById('answer3').addEventListener("click", nextQuestion)
 }
 
-var correctAnswerDiv = document.querySelector("#correctAnswer"); 
-var answerSelected = document.querySelector("#questionList"); 
-
 var endGameDiv = document.querySelector('.endGame'); 
 
 function gameOver() {
    //Hide the question area 
    document.querySelector('.quiz').classList.add("hide")
-
-   endGameDiv.innerHTML = ""; 
+   document.querySelector('.endGame').classList.remove("hide")
+   
    timeEl.innerHTML = "";
 
-   var createH1 = document.createElement("h1"); 
-   createH1.setAttribute("id", "createH1"); 
-   createH1.textContent = "Quiz is over!"
-
-   endGameDiv.appendChild(createH1); 
-
-   //Area to input name 
-   var createP1 = document.createElement("h2"); 
-   createP1.setAttribute("id", "createP1"); 
-   createP1.textContent = "Enter your initals to record your score." 
-
-    endGameDiv.appendChild(createP1); 
-
    //Show the record high score 
+   var highScoreEl = document.querySelector("#highScore"); 
+   highScoreEl.innerHTML = "Your score is " + timeRemaining; 
+}
+
+function returnText(){
+    
+    var initialInput = document.getElementById("initials").value; 
+    
+    localStorage.setItem("initial", initialInput); 
+    
 }

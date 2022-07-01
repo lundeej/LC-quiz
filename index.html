@@ -36,7 +36,13 @@
     </div>
         
     <!-- EndGame -->
-    <div class="endGame"></div>
+    <div class="endGame hide"> 
+        <h1 id="highScore">Game Over!</h1>
+        <h2>Enter your initals to record your score.</h2>
+        <input id="initials" type="text"/>
+        <button onclick="returnText()">Submit</button>
+    </div>
+    
     <div id="results"></div>
 
     <script src="./js/game.js"></script>
