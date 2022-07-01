@@ -121,13 +121,13 @@ function gameOver() {
 
    //Show the record high score 
    var highScoreEl = document.querySelector("#highScore"); 
-   highScoreEl.innerHTML = "Your score is " + timeRemaining; 
+   highScoreEl.innerHTML = "Your score is " + timeRemaining + "!"; 
 }
 
-function returnText(){
-    
-    var initialInput = document.getElementById("initials").value; 
-    
-    localStorage.setItem("initial", initialInput); 
-    
+
+function returnText(){    
+    var initials = document.getElementById("initials").value; 
+
+    localStorage.setItem("initials", (initials)); 
+    console.log(initials); 
 }
