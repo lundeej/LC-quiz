@@ -1,7 +1,18 @@
 var initialScore = JSON.parse(localStorage.getItem('user')); 
 
-var initialsDiv = document.querySelector("#initials");
-var scoreDiv = document.querySelector("#score");  
+var initialScoreDiv = document.querySelector("#initialScore");
 
-initialsDiv.textContent = initialScore.initial;
-scoreDiv.textContent = initialScore.score;  
+function allStorage(){
+    
+    var values = [], 
+        keys = Object.keys(localStorage), 
+        i = keys.length; 
+
+    while ( i-- ){
+        values.push(localStorage.getItem(keys[i])); 
+    }
+
+    return values; 
+}
+
+initialScoreDiv.textContent = initialScore.initial + " : " + initialScore.score; 
