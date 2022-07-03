@@ -127,7 +127,12 @@ function gameOver() {
 
 function returnText(){    
     var initials = document.getElementById("initials").value; 
-
-    localStorage.setItem("initials", (initials)); 
-    console.log(initials); 
+    
+    const person = {
+        initial: (initials), 
+        score: (timeRemaining),
+    }
+    console.log(person); 
+    
+    var initialScore = window.localStorage.setItem('user', JSON.stringify(person)); 
 }
